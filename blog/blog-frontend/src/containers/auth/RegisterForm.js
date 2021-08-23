@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
-import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/user';
 import { withRouter } from 'react-router-dom';
+import loadable from '@loadable/component';
+
+const AuthForm = loadable(() => import('../../components/auth/AuthForm'));
 
 const RegisterForm = ({ history }) => {
   const [error, setError] = useState(null);

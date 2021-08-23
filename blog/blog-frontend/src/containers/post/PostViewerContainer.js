@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PostViewer from '../../components/post/PostViewer';
 import { readPost, unloadPost } from '../../modules/post';
+import PostActionButtons from '../../components/post/PostActionButtons';
 import { setOriginalPost } from '../../modules/write';
 import { removePost } from '../../lib/api/posts';
-import loadable from '@loadable/component';
-
-const PostViewer = loadable(() => import('../../components/post/PostViewer'));
-const PostActionButtons = loadable(() =>
-  import('../../components/post/PostActionButtons'),
-);
 
 const PostViewerContainer = ({ match, history }) => {
   // 처음 마운트될 때 포스트 읽기 API 요청

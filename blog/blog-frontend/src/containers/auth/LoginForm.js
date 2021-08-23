@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth';
 import { check } from '../../modules/user';
-import loadable from '@loadable/component';
-
-const AuthForm = loadable(() => import('../../components/auth/AuthForm'));
+import AuthForm from '../../components/auth/AuthForm';
 
 const LoginForm = ({ history }) => {
   const [error, setError] = useState(null);

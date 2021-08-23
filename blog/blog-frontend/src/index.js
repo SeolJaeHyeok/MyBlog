@@ -1,15 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
+import { HelmetProvider } from 'react-helmet-async';
+import { hydrate } from 'react-dom';
+import { loadableReady } from '@loadable/component';
+
+import App from './App';
+import './index.css';
 import rootReducer, { rootSaga } from './modules/index';
 import { tempSetUser, check } from './modules/user';
-import { HelmetProvider } from 'react-helmet-async';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -31,13 +33,20 @@ function loadUser() {
 sagaMiddleware.run(rootSaga);
 loadUser();
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root'),
-);
+loadableReady(() => {
+  const rootElement = document.getElementById('root');
+  hydrate(
+    <Provider store={store}>
+      <BrowserRouter>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </BrowserRouter>
+    </Provider>,
+    rootElement,
+  );
+});
+
+if (module.hot) {
+  module.hot.accept();
+}

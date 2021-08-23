@@ -1,19 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+
 import Responsive from '../components/common/Responsive';
-import loadable from '@loadable/component';
-
-const EditorContainer = loadable(() =>
-  import('../containers/write/EditorContainer'),
-);
-
-const TagBoxContainer = loadable(() =>
-  import('../containers/write/TagBoxContainer'),
-);
-
-const WriteActionButtonsContainer = loadable(() =>
-  import('../containers/write/WriteActionButtonsContainer'),
-);
+import EditorContainer from '../containers/write/EditorContainer';
+import TagBoxContainer from '../containers/write/TagBoxContainer';
+import WriteActionButtonsContainer from '../containers/write/WriteActionButtonsContainer';
 
 const WritePage = () => {
   return (
